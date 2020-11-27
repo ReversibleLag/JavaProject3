@@ -15,10 +15,10 @@ class Project3 {
 	public static void main(String[] args) {
 		String option;
 		
-		//Student1 [] Student1 = new Student1[100];
+		//Student [] Student = new Student[100];
 		
-		//make sure to cast to the correct object type with ((Student1)p)
-		ArrayList<Person1> people = new ArrayList<Person1>();
+		//make sure to cast to the correct object type with ((Student)p)
+		ArrayList<Person> people = new ArrayList<Person>();
 
 		System.out.println("\t\t\t\t\tWelcome to my Personal Management Program");
 		System.out.println("Choose one of the options: \n");
@@ -30,7 +30,7 @@ class Project3 {
 		
   		switch (option)
   		{
-	  		//Add a new Faculty11 member
+	  		//Add a new Faculty member
 	  		case "1":
 	  			
 	  			System.out.println("Enter the Faculty's info:\n");
@@ -96,10 +96,10 @@ class Project3 {
 	  			
 	  			
 	  			
-	  			people.add(new Faculty1(userFacName, userFacID, userFacRank, userFacDepart));
+	  			people.add(new Faculty(userFacName, userFacID, userFacRank, userFacDepart));
 	  			break;
 	  		
-	  		//Add a new Student1
+	  		//Add a new Student
 	  		case "2":
 	  			
 	  			
@@ -119,36 +119,36 @@ class Project3 {
 	  			
 	  			System.out.println("\n\nThanks!\n");
 	  			
-	  			people.add(new Student1(name, id, gpa, hours));
-	  			//Student1s.add(new Student1(name, id, gpa, hours));
+	  			people.add(new Student(name, id, gpa, hours));
+	  			//Students.add(new Student(name, id, gpa, hours));
 	  			
 	  			
 	  			break;
 	  		
-	  		//Print tuition invoice for a Student1
+	  		//Print tuition invoice for a Student
 	  		case "3":
 	  			boolean foundStud = false;
 	  			
 	  			System.out.print("\tEnter the Student's id: ");
-	  			String Student1Id = new Scanner(System.in).nextLine();
+	  			String StudentId = new Scanner(System.in).nextLine();
 	  			
 	  			
 	  			if(people.isEmpty())
 	  			{
 	  				System.out.println("\nSorry-there are no people in the list!\n\n\n");
 	  			}
-	  			for(Person1 p: people)
-	  			//for(Student1 p: Student1s)
+	  			for(Person p: people)
+	  			//for(Student p: Students)
 	  			{
-	  				//add a print method to print the id of the Student1s
+	  				//add a print method to print the id of the Students
 	  				//System.out.println(p.getID());
 	  				
 	  				//test if get id is working
 	  				//System.out.println(p.getID());
-	  				if((p.getClass() == Student1.class) && p.getID().equalsIgnoreCase(Student1Id))
+	  				if((p.getClass() == Student.class) && p.getID().equalsIgnoreCase(StudentId))
 	  				{
 	  					//change this to correct stuff
-	  					((Student1)p).printInvoice();
+	  					((Student)p).printInvoice();
 	  					foundStud = true;
 	  					break;
 	  				}
@@ -164,21 +164,21 @@ class Project3 {
 	  			}
 	  			break;
 	  		
-	  		//Print information of a Faculty11
+	  		//Print information of a Faculty
 	  		case "4":
 	  			boolean foundFac = false;
 	  			System.out.print("\tEnter the Faculty's id: ");
 	  			String userPrintID = new Scanner(System.in).nextLine();
 	  			
-	  			for(Person1 p: people) {
-		  			if((p.getClass() == Faculty1.class) &&(userPrintID).equalsIgnoreCase(p.getID()))
+	  			for(Person p: people) {
+		  			if((p.getClass() == Faculty.class) &&(userPrintID).equalsIgnoreCase(p.getID()))
 		  			{
-		  				((Faculty1)p).printFaculty11();
+		  				((Faculty)p).printFaculty();
 		  				
-		  				/*System.out.println("\nFaculty11 found:");
+		  				/*System.out.println("\nFaculty found:");
 		  				System.out.println("\n\t-------------------------------------------------------------------------------------------------------------------------------------");
 		  				System.out.printf("\n\t%s", p.getFullName());
-		  				System.out.printf("\n\n\t%s Department, %s\n", ((Faculty11)p).getFacDepart(), ((Faculty11)p).getFacRank());
+		  				System.out.printf("\n\n\t%s Department, %s\n", ((Faculty)p).getFacDepart(), ((Faculty)p).getFacRank());
 		  				System.out.println("\n\t-------------------------------------------------------------------------------------------------------------------------------------\n");
 		  				*/
 		  				foundFac = true;
@@ -247,14 +247,14 @@ class Project3 {
 //====================================================================================
 //====================================================================================
 
-  	abstract class Person1 {
+  	abstract class Person {
   		
-  		//required things for Student1 and Faculty11 
+  		//required things for Student and Faculty 
   		private String fullName;
   		private String ID;
   		
   		
-  		public void Person1()
+  		public void Person()
   		{
   			fullName = "";
   			ID = "";
@@ -287,26 +287,26 @@ class Project3 {
   //====================================================================================
   //====================================================================================
   	
-  	class Faculty1 extends Person1{
-  		private String Faculty1Depart;
-  		private String Faculty1Rank;
+  	class Faculty extends Person{
+  		private String FacultyDepart;
+  		private String FacultyRank;
   		
   		//default constructor
-  		public Faculty1()
+  		public Faculty()
   		{
   			super();
-  			Faculty1Depart = "";
-  			Faculty1Rank = "";
+  			FacultyDepart = "";
+  			FacultyRank = "";
   			
   		}
   		
   		//constructor
-  		public Faculty1 (String userFacName, String userFacID, String userFacRank, String userFacDepart)
+  		public Faculty (String userFacName, String userFacID, String userFacRank, String userFacDepart)
   		{
   			super.setFullName(userFacName);
   			super.setID(userFacID);
-  			Faculty1Depart = userFacDepart;
-  			Faculty1Rank = userFacRank;
+  			FacultyDepart = userFacDepart;
+  			FacultyRank = userFacRank;
   		}
   		
   		public String getFacName()
@@ -321,15 +321,15 @@ class Project3 {
   		
   		public String getFacRank()
   		{
-  			return Faculty1Rank;
+  			return FacultyRank;
   		}
   		
   		public String getFacDepart()
   		{
-  			return Faculty1Depart;
+  			return FacultyDepart;
   		}
   		
-  		public void printFaculty11()
+  		public void printFaculty()
   		{
   				System.out.println("\nFaculty found:");
   				System.out.println("\n\t-------------------------------------------------------------------------------------------------------------------------------------");
@@ -346,8 +346,8 @@ class Project3 {
   //====================================================================================
   //====================================================================================
   	
-  	//class that handles the Student1s
-  	class Student1 extends Person1{
+  	//class that handles the Students
+  	class Student extends Person{
   		
   		private double GPA;
   		private int numCreditHours;
@@ -355,7 +355,7 @@ class Project3 {
   		
   		
   		//default constructor
-  		public Student1()
+  		public Student()
   		{
   			super.setFullName("");
   			super.setID("");
@@ -365,7 +365,7 @@ class Project3 {
   		}
   		
   		//constructor
-  		public Student1(String name, String ID, double GPA, int numCreditHours)
+  		public Student(String name, String ID, double GPA, int numCreditHours)
   		{
   			super.setFullName(name);
   			super.setID(ID);
@@ -377,28 +377,28 @@ class Project3 {
   		
   		
   		
-  		//gets the full name of the Person1 this class represents
+  		//gets the full name of the Person this class represents
   		@Override
   		public String getFullName() {
   			// TODO Auto-generated method stub
   			return super.getFullName();
   		}
   		
-  		//set the name of the Student1 class
+  		//set the name of the Student class
   		@Override
   		public void setFullName(String fullName) {
   			// TODO Auto-generated method stub
   			super.setFullName(fullName);
   		}
   		
-  		//gets the id of the Person1 class associated with this object
+  		//gets the id of the Person class associated with this object
   		@Override
   		public String getID() {
   			return super.getID();
   		}
   		
   		
-  		//set the id of the Student1 class
+  		//set the id of the Student class
   		@Override
   		public void setID(String iD) {
   			// TODO Auto-generated method stub
@@ -429,7 +429,7 @@ class Project3 {
   				System.out.println("\n\tCredit Hours: " + getNumCreditHours() + "  ($236.45/credit hour)");
   				System.out.println("\n\tFees: $52" );
   				
-  				System.out.print("\n\n\n\n\tTotal payment: $ " + myFormat.format(Student1_calculations())  + " ");
+  				System.out.print("\n\n\n\n\tTotal payment: $ " + myFormat.format(Student_calculations())  + " ");
   				if ((getGPA()) >= 3.85) {
   					System.out.printf("\t25%% off discout applied");
   				} else {
@@ -438,7 +438,7 @@ class Project3 {
   				System.out.println("\n\n\t---------------------------------------------------------------------------");
   		}
   		
-  		public double Student1_calculations() 
+  		public double Student_calculations() 
   		{
   			double total_payment;
   			double credit_hours =getNumCreditHours();
