@@ -5,6 +5,7 @@
 */
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.text.NumberFormat;
 import java.math.RoundingMode;
@@ -21,7 +22,7 @@ class Project3 {
 		ArrayList<Person> people = new ArrayList<Person>();
 
 		System.out.println("\t\t\t\t\tWelcome to my Personal Management Program");
-		System.out.println("Choose one of the options: \n");
+		System.out.println("\tChoose one of the options: \n");
 		
 		//called option menu and selection switch every while not exit condition
 		do {
@@ -34,13 +35,49 @@ class Project3 {
 	  		case "1":
 	  			
 	  			System.out.println("Enter the Faculty's info:\n");
-	  			System.out.print("\tName of the Faculty: ");
+	  			System.out.print("\t\tName of the Faculty: ");
 	  			String userFacName = new Scanner(System.in).nextLine();
 	  			
-	  			System.out.print("\n\tID: ");
+	  			System.out.print("\n\t\tID: ");
 	  			String userFacID = new Scanner(System.in).nextLine();
 	  			
-	  			System.out.print("\n\tRank: ");
+	  			try
+	  			{
+  					if(userFacID.length() != 5)
+  					{
+  						throw new InputMismatchException();
+  					}
+		  			if(!Character.isLetter(userFacID.charAt(0)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if(!Character.isLetter(userFacID.charAt(1)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if(!Character.isDigit(userFacID.charAt(2)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if(!Character.isDigit(userFacID.charAt(3)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if(!Character.isDigit(userFacID.charAt(4)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if(!Character.isDigit(userFacID.charAt(5)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  			}
+  				catch(InputMismatchException e)
+  				{
+  					System.out.println("\n\tSorry Invalid id format-It has to be LetterLetterDigitDigitDigitDigit\n");
+  					break;
+  				}
+	  			System.out.print("\n\t\tRank: ");
 	  			String userFacRank = new Scanner(System.in).nextLine();
 	  			
 	  			while (!userFacRank.equalsIgnoreCase("Professor"))
@@ -56,15 +93,15 @@ class Project3 {
 		  				break;
 		  			}
 	  				
-	  				System.out.printf("\n\t\tSorry entered rank (%s) is invalid\n", userFacRank);
+	  				System.out.printf("\n\t\t\tSorry entered rank (%s) is invalid\n", userFacRank);
 	  				
-	  				System.out.print("\n\tInput Rank again: ");
+	  				System.out.print("\n\t\tInput Rank again: ");
 		  			userFacRank = new Scanner(System.in).nextLine();
 		  			
 		  			
 	  			}
 	  			
-	  			System.out.print("\n\tDepartment: ");
+	  			System.out.print("\n\t\tDepartment: ");
 	  			String userFacDepart = new Scanner(System.in).nextLine();
 	  			
 	  			while (!userFacDepart.equalsIgnoreCase("Mathematics"))
@@ -85,14 +122,14 @@ class Project3 {
 		  				break;
 		  			}
 	  				
-	  				System.out.printf("\n\t\tSorry entered department (%s) is invalid\n", userFacDepart);
+	  				System.out.printf("\n\t\t\tSorry entered department (%s) is invalid\n", userFacDepart);
 	  				
-	  				System.out.print("\n\tInput Department again: ");
+	  				System.out.print("\n\t\tInput Department again: ");
 		  			userFacDepart = new Scanner(System.in).nextLine();
 		  			
 	  			}
 
-	  			System.out.println("\n\nThanks!\n");
+	  			System.out.println("\n\n\tThanks!\n");
 	  			
 	  			
 	  			
@@ -105,25 +142,64 @@ class Project3 {
 	  			
 	  			System.out.print("Enter the Student's info: "); 
 	  			
-	  			System.out.print("\n\n\tName of Student: ");
+	  			System.out.print("\n\n\t\tName of Student: ");
 	  			String name = new Scanner(System.in).nextLine();
 	  			
-	  			System.out.print("\n\tID: ");
-	  			String id = new Scanner(System.in).nextLine();
 	  			
-	  			System.out.print("\n\tGpa: ");
-	  			double gpa = new Scanner(System.in).nextDouble();
+  				System.out.print("\n\t\tID: ");
+  				String id = new Scanner(System.in).nextLine();
+  				
+  				try {
+  					if(id.length() != 5)
+  					{
+  						throw new InputMismatchException();
+  					}
+	  				if( !Character.isLetter(id.charAt(0)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if( !Character.isLetter(id.charAt(1)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if( !Character.isDigit(id.charAt(2)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if(!Character.isDigit(id.charAt(3)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if(!Character.isDigit(id.charAt(4)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				if(!Character.isDigit(id.charAt(5)))
+	  				{
+	  					throw new InputMismatchException();
+	  				}
+	  				
+		  			System.out.print("\n\t\tGpa: ");
+		  			double gpa = new Scanner(System.in).nextDouble();
+		  			
+		  			System.out.print("\n\t\tCredit hours: ");
+		  			int hours = new Scanner(System.in).nextInt();
+		  			
+		  			System.out.println("\n\n\tThanks!\n");
+		  			
+		  			people.add(new Student(name, id, gpa, hours));
+		  			//Students.add(new Student(name, id, gpa, hours));
+		  			
+		  			
+		  			break;
+	  				
+  				}
+  				catch(InputMismatchException e)
+  				{
+  					System.out.println("\n\tSorry Invalid id format-It has to be LetterLetterDigitDigitDigitDigit\n");
+  					break;
+  				}
 	  			
-	  			System.out.print("\n\tCredit hours: ");
-	  			int hours = new Scanner(System.in).nextInt();
-	  			
-	  			System.out.println("\n\nThanks!\n");
-	  			
-	  			people.add(new Student(name, id, gpa, hours));
-	  			//Students.add(new Student(name, id, gpa, hours));
-	  			
-	  			
-	  			break;
 	  		
 	  		//Print tuition invoice for a Student
 	  		case "3":
@@ -132,11 +208,13 @@ class Project3 {
 	  			System.out.print("\tEnter the Student's id: ");
 	  			String StudentId = new Scanner(System.in).nextLine();
 	  			
-	  			
-	  			if(people.isEmpty())
-	  			{
-	  				System.out.println("\nSorry-there are no people in the list!\n\n\n");
-	  			}
+
+	  				if(people.isEmpty())
+		  			{
+		  				System.out.println("\nSorry-there are no people in the list!\n\n\n");
+		  				break;
+		  			}	
+
 	  			for(Person p: people)
 	  			//for(Student p: Students)
 	  			{
@@ -167,8 +245,10 @@ class Project3 {
 	  		//Print information of a Faculty
 	  		case "4":
 	  			boolean foundFac = false;
-	  			System.out.print("\tEnter the Faculty's id: ");
+	  			System.out.print("\t\tEnter the Faculty's id: ");
 	  			String userPrintID = new Scanner(System.in).nextLine();
+	  			
+	  			System.out.print("\n");
 	  			
 	  			for(Person p: people) {
 		  			if((p.getClass() == Faculty.class) &&(userPrintID).equalsIgnoreCase(p.getID()))
@@ -201,7 +281,7 @@ class Project3 {
 	  			break;
 	  			
 	  		default:
-	  			System.out.println("Invalid entry- please try again\n\n");
+	  			System.out.println("\tInvalid entry- please try again\n\n");
 	  			break;
 	  			
   		
@@ -225,18 +305,18 @@ class Project3 {
 
 			// Title sequence
 
-			System.out.println("1- Add a new Faculty member");
-			System.out.println("2- Add a new Student");
-			System.out.println("3- Print tuition invoice for a Student");
-			System.out.println("4- Print information of a Faculty");
-			System.out.println("5- Exit Program\n");
+			System.out.println("\t1- Add a new Faculty member");
+			System.out.println("\t2- Add a new Student");
+			System.out.println("\t3- Print tuition invoice for a Student");
+			System.out.println("\t4- Print information of a Faculty");
+			System.out.println("\t5- Exit Program\n");
 
 			//get the user selection
-			System.out.print("\tEnter your selection: ");
+			System.out.print("\t\tEnter your selection: ");
 			option = new Scanner(System.in).nextLine();
 
 			//formatting
-			System.out.print("\n\n");
+			System.out.print("\n");
 			
 			//return out the selection
 			return option;
@@ -331,11 +411,11 @@ class Project3 {
   		
   		public void printFaculty()
   		{
-  				System.out.println("\nFaculty found:");
-  				System.out.println("\n\t-------------------------------------------------------------------------------------------------------------------------------------");
-  				System.out.printf("\n\t%s", getFullName());
-  				System.out.printf("\n\n\t%s Department, %s\n", getFacDepart(), getFacRank());
-  				System.out.println("\n\t-------------------------------------------------------------------------------------------------------------------------------------\n");
+  				System.out.println("\n\tFaculty found:");
+  				System.out.println("\n\t\t-------------------------------------------------------------------------------------------------------------------------------------");
+  				System.out.printf("\n\t\t%s", getFullName());
+  				System.out.printf("\n\n\t\t%s Department, %s\n", getFacDepart(), getFacRank());
+  				System.out.println("\n\t\t-------------------------------------------------------------------------------------------------------------------------------------\n");
 
   		}
   		
