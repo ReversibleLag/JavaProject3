@@ -10,12 +10,18 @@ import java.util.Scanner;
 import java.text.NumberFormat;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.IOException;
 
 class Project3 {
-	public static void main(String[] args) {
+	public static <PrintReport> void main(String[] args, Object Faculty, Faculty F, Person p) {
 		String option;
+		File Report = null;
+		PrintWriter report = null;
 		
+		Report = new File("report.dat");
+		report = new PrintWriter(Report);
 		//Student [] Student = new Student[100];
 		
 		//make sure to cast to the correct object type with ((Student)p)
@@ -277,6 +283,31 @@ class Project3 {
 	  		
 	  		//exit program
 	  		case "5":
+	  			System.out.println("\n");
+	  			System.out.println("\tWould you like to create the report? (Y/N):");
+	  			String reportPrint = new Scanner(System.in).next();
+	  			if (reportPrint == "Y" || reportPrint == "y") {
+	  				report.println("/t/tReport created on 7/15/2020");
+	  				report.println("Faculty Members (sorted by Department)");
+	  				report.println("--------------------------------------");
+	  				for (int i = 0; i < sizeof(Faculty); i++)
+	  				{
+	  					report.printf("\t%d. %s\n", i, ((Faculty) F).getFacName());
+		  				report.printf("\tID: %s\n", ((Faculty) F).getFacID());
+		  				report.printf("\t%s, %s\n", ((Faculty) F).getFacRank(), ((Faculty) F).getFacDepart());
+		  				report.println("\nStudents");
+		  				report.println("-----------");
+	  				}
+	  				for (int i = 0; i < sizeof(people); i++)
+	  				{
+	  					report.printf("%d. %s", i, ((Person) p).getFullName());
+		  				report.printf("ID: %s", ((Person) p).getID());
+		  				report.printf("Gpa: %f", ((Student) p).getGPA());
+		  				report.printf("Credit hours: %d", ((Student) p).getNumCreditHours());
+	  				}
+	  			}
+	  			
+	  			System.out.println("\tYour file has been created!");
 	  			System.out.println("\tGoodbye!");
 	  			break;
 	  			
@@ -292,6 +323,12 @@ class Project3 {
 		
 	}
 	
+
+	private static int sizeof(ArrayList<Person> people) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 	//menu of the main selection
   	private static String menu()
@@ -534,4 +571,7 @@ class Project3 {
   			
   	}
 	
+  	//====================================================================================
+    //====================================================================================
+  	
 
