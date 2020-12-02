@@ -49,7 +49,7 @@ class Project3 {
 	  			
 	  			try
 	  			{
-  					if(userFacID.length() != 5)
+  					if(userFacID.length() != 6)
   					{
   						throw new InputMismatchException();
   					}
@@ -156,7 +156,7 @@ class Project3 {
   				String id = new Scanner(System.in).nextLine();
   				
   				try {
-  					if(id.length() != 5)
+  					if(id.length() != 6)
   					{
   						throw new InputMismatchException();
   					}
