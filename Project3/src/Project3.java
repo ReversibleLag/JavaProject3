@@ -305,6 +305,8 @@ class Project3 {
 		  				report.printf("Gpa: %f", ((Student) p).getGPA());
 		  				report.printf("Credit hours: %d", ((Student) p).getNumCreditHours());
 	  				}
+	  			} else {
+	  				return;
 	  			}
 	  			
 	  			System.out.println("\tYour file has been created!");
