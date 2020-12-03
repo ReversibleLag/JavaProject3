@@ -13,16 +13,34 @@ import java.text.DecimalFormat;
 import java.io.PrintWriter;
 import java.io.Closeable;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 
 class Project3 {
-	public static <PrintReport> void main(String[] args, Object Faculty, Faculty F, Person p) {
-		String option;
-		File Report = null;
+	public static int z;
+	public static int q;
+	public static void main(String[] args) {
+
 		PrintWriter report = null;
+		try {
+			File Report = new File("report.dat");
+			FileWriter fw = new FileWriter(Report, true);
+			report = new PrintWriter(fw);
+			
+//			
+//		Faculty F = new Faculty();
+//		Student S = new Student();
+		String option;
+
 		
 		Report = new File("report.dat");
-		report = new PrintWriter(Report);
+		try {
+			report = new PrintWriter(Report);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		//Student [] Student = new Student[100];
 		
 		//make sure to cast to the correct object type with ((Student)p)
@@ -40,7 +58,6 @@ class Project3 {
   		{
 	  		//Add a new Faculty member
 	  		case "1":
-	  			
 	  			System.out.println("Enter the Faculty's info:\n");
 	  			System.out.print("\t\tName of the Faculty: ");
 	  			String userFacName = new Scanner(System.in).nextLine();
@@ -141,6 +158,7 @@ class Project3 {
 	  			
 	  			
 	  			people.add(new Faculty(userFacName, userFacID, userFacRank, userFacDepart));
+	  			z+=1;
 	  			break;
 	  		
 	  		//Add a new Student
@@ -197,7 +215,7 @@ class Project3 {
 		  			people.add(new Student(name, id, gpa, hours));
 		  			//Students.add(new Student(name, id, gpa, hours));
 		  			
-		  			
+		  			z+=1;
 		  			break;
 	  				
   				}
@@ -222,7 +240,7 @@ class Project3 {
 		  				break;
 		  			}	
 
-	  			for(Person p: people)
+	  			for(Person p1: people)
 	  			//for(Student p: Students)
 	  			{
 	  				//add a print method to print the id of the Students
@@ -230,10 +248,10 @@ class Project3 {
 	  				
 	  				//test if get id is working
 	  				//System.out.println(p.getID());
-	  				if((p.getClass() == Student.class) && p.getID().equalsIgnoreCase(StudentId))
+	  				if((p1.getClass() == Student.class) && p1.getID().equalsIgnoreCase(StudentId))
 	  				{
 	  					//change this to correct stuff
-	  					((Student)p).printInvoice();
+	  					((Student)p1).printInvoice();
 	  					foundStud = true;
 	  					break;
 	  				}
@@ -257,10 +275,10 @@ class Project3 {
 	  			
 	  			System.out.print("\n");
 	  			
-	  			for(Person p: people) {
-		  			if((p.getClass() == Faculty.class) &&(userPrintID).equalsIgnoreCase(p.getID()))
+	  			for(Person p1: people) {
+		  			if((p1.getClass() == Faculty.class) &&(userPrintID).equalsIgnoreCase(p1.getID()))
 		  			{
-		  				((Faculty)p).printFaculty();
+		  				((Faculty)p1).printFaculty();
 		  				
 		  				/*System.out.println("\nFaculty found:");
 		  				System.out.println("\n\t-------------------------------------------------------------------------------------------------------------------------------------");
@@ -286,31 +304,45 @@ class Project3 {
 	  		case "5":
 	  			System.out.println("\n");
 	  			System.out.println("\tWould you like to create the report? (Y/N):");
-	  			String reportPrint = new Scanner(System.in).next();
-	  			if (reportPrint == "Y" || reportPrint == "y") {
+	  			Scanner sc = new Scanner(System.in);
+	  			String reportPrint = sc.nextLine();
+	  			if (reportPrint.equals("Y") || reportPrint.equals("y") ) {
 	  				report.println("/t/tReport created on 7/15/2020");
 	  				report.println("Faculty Members (sorted by Department)");
 	  				report.println("--------------------------------------");
-	  				for (int i = 0; i < sizeof(Faculty); i++)
+	  				for (int i = 0; i < z; i++)
 	  				{
-	  					report.printf("\t%d. %s\n", i, ((Faculty) F).getFacName());
-		  				report.printf("\tID: %s\n", ((Faculty) F).getFacID());
-		  				report.printf("\t%s, %s\n", ((Faculty) F).getFacRank(), ((Faculty) F).getFacDepart());
-		  				report.println("\nStudents");
-		  				report.println("-----------");
+	  					if(!people.get(i).isStudent()) {
+	  						q+=1;
+	  					report.printf("\t%d. %s\n", q, (((Faculty) people.get(i)).getFacName()));
+		  				report.printf("\tID: %s\n", (((Faculty) people.get(i)).getFacID()));
+		  				report.printf("\t%s, %s\n", (((Faculty) people.get(i)).getFacRank()), ((Faculty) people.get(i)).getFacDepart());
+
+	  					}
 	  				}
-	  				for (int i = 0; i < sizeof(people); i++)
+	  				report.println("\nStudents");
+	  				report.println("-----------");
+	  				q = 0;
+	  				for (int i = 0; i < z; i++)
 	  				{
-	  					report.printf("%d. %s", i, ((Person) p).getFullName());
-		  				report.printf("ID: %s", ((Person) p).getID());
-		  				report.printf("Gpa: %f", ((Student) p).getGPA());
-		  				report.printf("Credit hours: %d", ((Student) p).getNumCreditHours());
+	  					if(people.get(i).isStudent()) {
+	  					q+=1;
+	  					report.printf("\t%d. %s\n", q, ((Student) people.get(i)).getFullName());
+		  				report.printf("\tID: %s\n", ((Student) people.get(i)).getID());
+		  				report.printf("\tGpa: %.2f\n", ((Student) people.get(i)).getGPA());
+		  				report.printf("\tCredit hours: %d\n", ((Student) people.get(i)).getNumCreditHours());
+	  					}
 	  				}
 	  			} else {
 	  				return;
 	  			}
 	  			report.flush();
-	  			((Closeable) Report).close();
+//			try {
+//				((Closeable) Report).close();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 	  			
 	  			System.out.println("\tYour file has been created!");
 	  			System.out.println("\tGoodbye!");
@@ -324,15 +356,17 @@ class Project3 {
   		}		
 		
 		//exit condition
-		}while (!option.equals("5"));
+		}while (!option.equals("5"));} catch (IOException e) {
+		     e.printStackTrace();
+		  } finally {
+			  if (report != null) {
+			  report.close();  
+			  }
+		  }
 		
 	}
 	
 
-	private static int sizeof(ArrayList<Person> people) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 
 	//menu of the main selection
@@ -399,6 +433,10 @@ class Project3 {
   			ID = iD;
   		}
   		
+  		public boolean isStudent() {
+  			return false;
+  		}
+  		
 
   		
   		
@@ -425,6 +463,11 @@ class Project3 {
   		//constructor
   		public Faculty (String userFacName, String userFacID, String userFacRank, String userFacDepart)
   		{
+  			String lowercaseStringDept = userFacDepart.toLowerCase();
+  			userFacDepart = lowercaseStringDept;
+  			
+  			String lowercaseStringRank = userFacRank.toLowerCase();
+  			userFacRank = lowercaseStringRank;
   			super.setFullName(userFacName);
   			super.setID(userFacID);
   			FacultyDepart = userFacDepart;
@@ -459,6 +502,10 @@ class Project3 {
   				System.out.printf("\n\n\t\t%s Department, %s\n", getFacDepart(), getFacRank());
   				System.out.println("\n\t\t-------------------------------------------------------------------------------------------------------------------------------------\n");
 
+  		}
+  		@Override
+  		public boolean isStudent() {
+  			return false;
   		}
   		
   		
@@ -573,10 +620,13 @@ class Project3 {
   			return total_payment;
   				
   		}
+  		@Override
+  		public boolean isStudent() {
+  			return true;
+  		}
   			
   	}
 	
   	//====================================================================================
     //====================================================================================
   	
-
