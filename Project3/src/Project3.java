@@ -5,9 +5,11 @@
 */
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.io.PrintWriter;
@@ -204,7 +206,17 @@ class Project3 {
 	  					throw new InputMismatchException();
 	  				}
 	  				
-		  			System.out.print("\n\t\tGpa: ");
+	  				
+  				}
+  				catch(InputMismatchException e)
+  				{
+  					System.out.println("\n\tSorry Invalid id format-It has to be LetterLetterDigitDigitDigitDigit\n");
+  					break;
+  				}
+  				
+  				try
+  				{
+  					System.out.print("\n\t\tGpa: ");
 		  			double gpa = new Scanner(System.in).nextDouble();
 		  			
 		  			System.out.print("\n\t\tCredit hours: ");
@@ -217,11 +229,10 @@ class Project3 {
 		  			
 		  			z+=1;
 		  			break;
-	  				
   				}
   				catch(InputMismatchException e)
   				{
-  					System.out.println("\n\tSorry Invalid id format-It has to be LetterLetterDigitDigitDigitDigit\n");
+  					System.out.println("\nSorry Invalid format - Double or Integer only\n");
   					break;
   				}
 	  			
@@ -303,11 +314,14 @@ class Project3 {
 	  		//exit program
 	  		case "5":
 	  			System.out.println("\n");
-	  			System.out.println("\tWould you like to create the report? (Y/N):");
+	  			System.out.print("\tWould you like to create the report? (Y/N): ");
 	  			Scanner sc = new Scanner(System.in);
 	  			String reportPrint = sc.nextLine();
 	  			if (reportPrint.equals("Y") || reportPrint.equals("y") ) {
-	  				report.println("/t/tReport created on 7/15/2020");
+	  				Date date = new Date();
+	  				SimpleDateFormat format = new SimpleDateFormat("MM-dd-yy");
+	  				
+	  				report.println("\t\tReport created on " + format.format(date));
 	  				report.println("Faculty Members (sorted by Department)");
 	  				report.println("--------------------------------------");
 	  				for (int i = 0; i < z; i++)
@@ -334,6 +348,7 @@ class Project3 {
 	  					}
 	  				}
 	  			} else {
+	  				System.out.println("Thanks! Goodbye!");
 	  				return;
 	  			}
 	  			report.flush();
